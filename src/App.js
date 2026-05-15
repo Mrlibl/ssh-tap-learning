@@ -25,6 +25,7 @@ export default class App extends Component {
             trans: [],
             allWords: [],
             pronounSrc: "",
+            isFirstLoad: true,
         }
 
     }
@@ -65,7 +66,11 @@ export default class App extends Component {
             ukphone: wordInfo.content.word.content.ukphone,
             usphone: wordInfo.content.word.content.usphone
         }, () => {
-            this.getPronounce()
+            if (!this.state.isFirstLoad) {
+                this.getPronounce()
+            } else {
+                this.setState({ isFirstLoad: false })
+            }
         }
         )
 
